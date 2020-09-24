@@ -1,4 +1,4 @@
-package com.pokeapp;
+package com.pokepris;
 
 import android.os.Bundle;
 import com.facebook.react.ReactActivity;
