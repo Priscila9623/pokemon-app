@@ -6,7 +6,7 @@
     "android": "npx react-native run-android",
     "ios": "react-native run-ios",
     "clean": "cd android && ./gradlew clean && cd ..",
-    "upgradeVersion": "node ./scripts/upgradeVersion.js",
+    "release": "npx react-native run-android --variant=release",
     "build:apk": "cd android && ./gradlew assembleRelease && cd ..",
     "build:bundle": "cd android && ./gradlew bundleRelease"
   },
