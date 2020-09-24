@@ -1,40 +1,48 @@
 {
-  "project_info": {
-    "project_number": "369007017734",
-    "firebase_url": "https://poke-app-31906.firebaseio.com",
-    "project_id": "poke-app-31906",
-    "storage_bucket": "poke-app-31906.appspot.com"
-  },
-  "client": [
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:369007017734:android:5341b823ff1c9976c6e887",
-        "android_client_info": {
-          "package_name": "com.pokepris"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "369007017734-g92dk21hl01gvk7c5e4v13epl4pal46e.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBBFlEs0JmLIwm7kJ9OD5e-LvxEwBEVrcA"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "369007017734-g92dk21hl01gvk7c5e4v13epl4pal46e.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    }
-  ],
-  "configuration_version": "1"
-}
+	"project_info": {
+	  "project_number": "369007017734",
+	  "firebase_url": "https://poke-app-31906.firebaseio.com",
+	  "project_id": "poke-app-31906",
+	  "storage_bucket": "poke-app-31906.appspot.com"
+	},
+	"client": [
+	  {
+		"client_info": {
+		  "mobilesdk_app_id": "1:369007017734:android:5341b823ff1c9976c6e887",
+		  "android_client_info": {
+			"package_name": "com.pokepris"
+		  }
+		},
+		"oauth_client": [
+		  {
+			"client_id": "369007017734-5q8fhspi682u0ep1bjpl5q7s9haflpme.apps.googleusercontent.com",
+			"client_type": 1,
+			"android_info": {
+			  "package_name": "com.pokepris",
+			  "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+			}
+		  },
+		  {
+			"client_id": "369007017734-g92dk21hl01gvk7c5e4v13epl4pal46e.apps.googleusercontent.com",
+			"client_type": 3
+		  }
+		],
+		"api_key": [
+		  {
+			"current_key": "AIzaSyBBFlEs0JmLIwm7kJ9OD5e-LvxEwBEVrcA"
+		  }
+		],
+		"services": {
+		  "appinvite_service": {
+			"other_platform_oauth_client": [
+			  {
+				"client_id": "369007017734-g92dk21hl01gvk7c5e4v13epl4pal46e.apps.googleusercontent.com",
+				"client_type": 3
+			  }
+			]
+		  }
+		}
+	  }
+	],
+	"configuration_version": "1"
+  }
