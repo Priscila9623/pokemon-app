@@ -17,8 +17,8 @@ const styles = StyleSheet.create({
 		width: '100%',
 	},
 	contentLogo: {
-		width: '80%',
-		height: 120,
+		width: '70%',
+		height: 100,
 		marginVertical: 50,
 	},
 	footer: {
