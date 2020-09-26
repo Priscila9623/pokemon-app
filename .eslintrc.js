@@ -27,6 +27,7 @@ module.exports = {
 						"@components/*": "app/components/*",
 						"@helpers/*"   : "app/helpers/*",
 						"@hooks/*"     : "app/hooks/*",
+						"@actions/*"   : "app/store/actions/*",
 						"@screens/*"   : "app/screens/*",
 						"@config/*"    : "app/config/*",
 						"@navigators/*": "app/navigators/*",
