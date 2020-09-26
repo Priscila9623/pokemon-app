@@ -15,6 +15,11 @@ const colors = {
 	DarkBlue: '#192F6A',
 	Red: '#EC2B2B',
 	Salmon: '#EC6568',
+	SkyBlue: '#75D9FF',
+	Yellow: '#FFCE4D',
+	Mint: '#4DE092',
+	Purple: '#815AF9',
+	Brown: '#986D6D',
 };
 
 export {
