@@ -1,9 +1,11 @@
-import HomeScreen from '@screens/userScreens/home';
-import AboutScreen from '@screens/userScreens/about';
+import RegionScreen from '@screens/userScreens/regions';
+import PokemonScreen from '@screens/userScreens/pokemon';
+import PokemonDetailsScreen from '@screens/userScreens/pokemonDetails';
 
 const userScreens = {
-	Home: HomeScreen,
-	About: AboutScreen,
+	Region: RegionScreen,
+	Pokemon: PokemonScreen,
+	PokemonDetails: PokemonDetailsScreen,
 };
 
 export default userScreens;
