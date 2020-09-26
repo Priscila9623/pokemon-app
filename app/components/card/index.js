@@ -1,8 +1,7 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 import { string, func } from "prop-types";
 import setRandomColor from '@helpers/style/setRandomColor';
-import { colors } from '@config/style';
 import styles from './style';
 
 const Card = ({ text, action, color }) => {

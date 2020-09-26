@@ -21,6 +21,12 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		margin: 10,
 	},
+	defaultLogo: {
+		padding: 20,
+		width: '100%',
+		alignItems: 'center',
+		justifyContent: 'center'
+	},
 	image: {
 		width: '60%',
 		height: '60%',
@@ -74,7 +80,21 @@ const styles = StyleSheet.create({
 	typeText: {
 		fontSize: 12,
 		textTransform: 'capitalize',
-	}
+	},
+	plus: {
+		alignItems: 'flex-end',
+		marginTop: 30,
+		marginRight: 30,
+	},
+	input: {
+		padding: 0,
+		height: 50,
+		fontFamily: fonts.MontserratRegular,
+		backgroundColor: colors.LightGray,
+		paddingHorizontal: 5,
+		borderRadius: 12,
+		width: '100%',
+	},
 });
 
 export default styles;

@@ -1,22 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { View, TextInput, ActivityIndicator } from 'react-native';
+import { useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Layout from '@components/layout';
 import Card from '@components/card';
 import useDataApi from '@hooks/useDataApi';
 import useSearch from '@hooks/useSearch';
 import setRandomColor from '@helpers/style/setRandomColor';
-import { urlRegionById } from '@config/paths';
+import { urlRegionByName } from '@config/paths';
 import { colors } from '@config/style';
 import styles from './style';
 
-const Screen = ({navigation}) => {
+const Screen = ({ route, navigation}) => {
 	const [data, setData] = useState([]);
 	const [pokedexSize, setPokedexSize] = useState(-1);
 	const [pokedexItem, setpokedexItem] = useState(0);
 	const [typedText, setTypedText] = useState('');
+	const teamData = useSelector((state) => state.team);
 	const [state, fetchData] = useDataApi({
-		url: urlRegionById(6),
+		url: urlRegionByName(teamData.region_name),
 		headers: null,
 		hasCache: true
 	});
@@ -66,6 +68,10 @@ const Screen = ({navigation}) => {
 	}, [pokedexItem]);
 
 	useEffect(() => {
+		console.log('teamData', teamData);
+	}, [teamData])
+
+	useEffect(() => {
 		setpokedexItem(0);
 		setPokedexSize(-1);
 		fetchData();
@@ -94,7 +100,9 @@ const Screen = ({navigation}) => {
 										action={() =>
 											navigation.navigate('PokemonDetails', {
 												url: el.pokemon_species.url,
-												name: el.pokemon_species.name
+												name: el.pokemon_species.name,
+												isAdding: route.params.isAdding,
+												selectedIndex: route.params.selectedIndex,
 											})
 										}
 										key={index}

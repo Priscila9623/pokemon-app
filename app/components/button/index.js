@@ -53,6 +53,7 @@ Button.defaultProps = {
 	typeOfShape: 'rounded-contour',
 	addSpacing: true,
 	width: '100%',
+	action: () => { }
 };
 
 Button.propTypes = {

@@ -1,9 +1,9 @@
 import { StyleSheet } from 'react-native';
+import { fonts } from '@config/style';
 
 const styles = StyleSheet.create({
-	region: {
+	team: {
 		alignItems: 'center',
-		justifyContent: 'center',
 		marginHorizontal: 10,
 		height: '100%',
 	},
@@ -12,12 +12,23 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		flex: 1,
 	},
+	buttons: {
+		height: 150,
+		justifyContent: 'space-evenly',
+		width: '100%'
+	},
 	cardContainer: {
 		flexDirection: 'row',
 		justifyContent: 'space-around',
 		flexWrap: 'wrap',
 		width: '100%',
-		height: '100%',
+	},
+	myTeams: {
+
+	},
+	myTeamsText: {
+		fontSize: 16,
+		fontFamily: fonts.MontserratBold,
 	},
 });
 
