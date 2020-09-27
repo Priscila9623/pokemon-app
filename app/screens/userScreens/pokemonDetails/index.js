@@ -54,20 +54,21 @@ const Screen = ({ route, navigation }) => {
 
 	const add = () => {
 		const { pokemons } = teamData;
+		const pokemonsCopy = pokemons;
 		const currentPokemon = getCurrentPokemon();
-
-		pokemons.push(currentPokemon);
+		pokemonsCopy.push(currentPokemon);
 		return {
-			pokemons,
+			pokemons: pokemonsCopy,
 		};
 	};
 
 	const edit = () => {
 		const { pokemons } = teamData;
+		const pokemonsCopy = pokemons;
 		const currentPokemon = getCurrentPokemon();
-		pokemons.splice(route.params.selectedIndex, 1, currentPokemon);
+		pokemonsCopy.splice(route.params.selectedIndex, 1, currentPokemon);
 		return {
-			pokemons,
+			pokemon: pokemonsCopy,
 		}
 	}
 

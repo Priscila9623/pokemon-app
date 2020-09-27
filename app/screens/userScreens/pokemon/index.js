@@ -68,10 +68,6 @@ const Screen = ({ route, navigation}) => {
 	}, [pokedexItem]);
 
 	useEffect(() => {
-		console.log('teamData', teamData);
-	}, [teamData])
-
-	useEffect(() => {
 		setpokedexItem(0);
 		setPokedexSize(-1);
 		fetchData();
