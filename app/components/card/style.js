@@ -10,9 +10,14 @@ const styles = StyleSheet.create({
 		borderRadius: 12,
 		marginTop: 7,
 		padding: 10,
-		borderWidth: 1,
-		borderColor: '#E5E5E5',
-		elevation: 3,
+		shadowColor: "#000",
+		shadowOffset: {
+			width: 0,
+			height: 2
+		},
+		shadowOpacity: 0.25,
+		shadowRadius: 3.84,
+		elevation: 5,
 	},
 	cardText: {
 		fontSize: 15,

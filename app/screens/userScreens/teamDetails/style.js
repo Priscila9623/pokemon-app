@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
 	box: {
 		alignItems: 'center',
 		width: '100%',
-		marginBottom: 20,
+		marginVertical: 20,
 	},
 	icon: {
 		width: 70,
@@ -105,6 +105,10 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignItems: 'center',
 		justifyContent: 'center',
+	},
+	descriptionText: {
+		fontFamily: fonts.MontserratRegular,
+		fontSize: 13,
 	}
 });
 

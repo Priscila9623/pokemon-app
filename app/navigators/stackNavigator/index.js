@@ -33,7 +33,7 @@ const StackNavigator = () => {
 					initialRouteName={user ? 'Register' : 'Login'}
 					screenOptions={{
 						headerShown: false,
-						// cardStyle: { backgroundColor: '#fff' },
+						cardStyle: { backgroundColor: '#fff' },
 						gestureDirection: "horizontal",
 						transitionSpec:{
 							close: transitionSpecConfig,

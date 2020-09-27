@@ -45,6 +45,7 @@ const Screen = ({navigation }) => {
 										}
 										key={index}
 										text={el.name}
+										index={index}
 									/>
 								)}
 							</View>

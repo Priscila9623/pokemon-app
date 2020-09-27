@@ -37,7 +37,12 @@ const Screen = ({ route, navigation }) => {
 	};
 
 	const handleColor = (color) => {
-		return ['white', 'White'].includes(color) ? colors.DarkGray : color;
+		if(['yellow', 'Yellow'].includes(color)) {
+			return colors.Yellow;
+		} else if (['white', 'White'].includes(color)){
+			return colors.DarkGray;
+		}
+		return color;
 	}
 
 	const getCurrentPokemon = () => {
@@ -162,7 +167,7 @@ const Screen = ({ route, navigation }) => {
 									)
 								}
 								<View style={styles.details}>
-									<Text  style={[styles.text, {textAlign: 'justify'}]}>{traduce(data.flavor_text_entries)}</Text>
+									<Text style={[styles.text]}>{traduce(data.flavor_text_entries)}</Text>
 									<View style={[styles.card]}>
 										<View style={styles.columnDetails}>
 											<Text style={[styles.label]}>Peso:</Text>

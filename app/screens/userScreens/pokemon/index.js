@@ -6,7 +6,6 @@ import Layout from '@components/layout';
 import Card from '@components/card';
 import useDataApi from '@hooks/useDataApi';
 import useSearch from '@hooks/useSearch';
-import setRandomColor from '@helpers/style/setRandomColor';
 import { urlRegionByName } from '@config/paths';
 import { colors } from '@config/style';
 import styles from './style';
@@ -26,17 +25,18 @@ const Screen = ({ route, navigation}) => {
 	const [filteredData, setSearch, setSourceData] = useSearch();
 
 	const handlePokemons = (pokemons) => {
-		const whiteList = data;
-		for (const item of pokemons) {
-			let found = '';
-			if (pokedexItem > 0) {
-				found = whiteList.find(el => el.pokemon_species.name === item.pokemon_species.name);
-			}
-			if (!found) {
-				whiteList.push({...item, color: setRandomColor()});
+		if (data.length < 1) {
+			setData(pokemons);
+		} else {
+			const whiteList = data;
+			for (const item of pokemons) {
+				const found = whiteList.find(el => el.pokemon_species.name === item.pokemon_species.name);
+				if (!found) {
+					whiteList.push(item);
+				}
+				setData(whiteList);
 			}
 		}
-		setData(whiteList);
 		setpokedexItem(pokedexItem + 1);
 	}
 
@@ -103,7 +103,8 @@ const Screen = ({ route, navigation}) => {
 										}
 										key={index}
 										text={el.pokemon_species.name}
-										color={el.color} />
+										index={index}	
+									/>
 								)}
 							</View>
 						</>

@@ -125,7 +125,7 @@ const Screen = ({ route, navigation }) => {
 
 	const Content = (item, index) => {
 		return(
-			<View key={item.number}>
+			<View key={item.number} style={{backgroundColor: index % 2 && colors.LightGray}}>
 				<View style={styles.list}>
 					<View style={{flex: 1}}>
 					{
@@ -180,7 +180,7 @@ const Screen = ({ route, navigation }) => {
 					item.isOpen && (
 						<View style={{flex: 1, width: '100%'}}>
 							<View style={styles.description}>
-								<Text style={[styles.text, {textAlign: 'justify'}]}>{item.description}</Text>
+								<Text style={[styles.descriptionText]}>{item.description}</Text>
 							</View>
 							<View style={styles.types}>
 								{item.types.map((el, i) =>
@@ -250,7 +250,7 @@ const Screen = ({ route, navigation }) => {
 				</View>
 			</View>
 			<FlatList
-				data={teamData.pokemons}
+				data={data}
 				ListEmptyComponent={<EmptyList />}
 				ListFooterComponent={<Footer />}
 				renderItem={({item, index}) => Content(item, index)}

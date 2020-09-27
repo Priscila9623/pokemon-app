@@ -34,10 +34,12 @@ const styles = StyleSheet.create({
 	details: {
 		flex: 1,
 		alignItems: 'flex-start',
-		width: '100%',
+		flexGrow: 1,
+        flex: 1,
 	},
 	text:{
 		fontFamily: fonts.MontserratRegular,
+		fontSize: 13,
 	},
 	basicDetails: {
 		flexDirection: 'row',
@@ -53,12 +55,19 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		alignItems: 'center',
 		justifyContent: 'space-evenly',
-		width: '100%',
+		// width: '100%',
 		borderRadius: 12,
-		marginVertical: 10,
-		padding: 7,
-		borderWidth: 1,
-		borderColor: colors.MediumGray,
+		marginTop: 7,
+		padding: 10,
+		shadowColor: "#000",
+		shadowOffset: {
+			width: 0,
+			height: 2
+		},
+		shadowOpacity: 0.25,
+		shadowRadius: 3.84,
+		elevation: 5,
+		backgroundColor: colors.White,
 	},
 	label: {
 		color: colors.DarkGray,

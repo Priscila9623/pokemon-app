@@ -4,7 +4,6 @@ import { colors, fonts } from '@config/style';
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: colors.White,
 	},
 	content: {
 		flex: 1,
