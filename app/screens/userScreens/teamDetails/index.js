@@ -1,23 +1,70 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { View, TextInput, TouchableOpacity, FlatList, Text, Image, KeyboardAvoidingView } from 'react-native';
+import { View, TextInput, TouchableOpacity, FlatList, Text, Image } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
+import database from '@react-native-firebase/database';
 import FastImage from 'react-native-fast-image';
+import 'react-native-get-random-values';
+import { nanoid } from 'nanoid';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import CustomButton from '@components/button';
 import CustomModal from '@components/modal';
 import Badge from '@components/badge';
+import EmptyList from '@components/empty';
 import { setTeam } from '@actions/team.action';
 import Pokeball from '@images/pokeball.png';
 import { colors } from '@config/style';
 import styles from './style';
 
-const Screen = ({ navigation }) => {
+const Screen = ({ route, navigation }) => {
 	const dispatch = useDispatch();
 	const teamData = useSelector((state) => state.team);
-	const [isModalVisible, setIsModalVisible] = useState(false);
+	const [isRemoveModalVisible, setIsRemoveModalVisible] = useState(false);
+	const [isSuccessModalVisible, setIsSuccessModalVisible] = useState(false);
 	const [data, setData] = useState([]);
-	const [typedText, setTypedText] = useState('');
+	const [typedText, setTypedText] = useState(teamData.name);
 	const [selectedIndex, setSelectedIndex] = useState(-1);
+	const [isLoading, setIsLoading] = useState(false);
+
+	const generateToken = async () => {
+		const code = nanoid();
+		const isUsed = await database().ref()
+			.child('teams')
+			.orderByChild('token')
+			.equalTo(String(code))
+			.once('value')
+			.then((s) => s.val())
+			.catch((err) => console.log('err', err));
+
+		if (isUsed) {
+			return generateToken();
+		}
+		return code;
+	};
+
+	const updateTeam = () => {
+		setIsLoading(true);
+		const teamDataCopy = teamData;
+		const key = teamDataCopy.key;
+		delete teamDataCopy.key;
+		database().ref('teams').child(key).update({
+			...teamData,
+			name: typedText,
+		});
+		setIsSuccessModalVisible(true);
+		setIsLoading(false);
+	};
+
+	const addTeam = async () => {
+		setIsLoading(true);
+		const token = await generateToken();
+		database().ref('teams').push({
+			...teamData,
+			token,
+			name: typedText,
+		});
+		setIsSuccessModalVisible(true);
+		setIsLoading(false);
+	}
 
 	const handleOpenItem = (index) => {
 		const modData = data;
@@ -26,18 +73,20 @@ const Screen = ({ navigation }) => {
 	}
 
 	const transformData = () => {
-		const { pokemons } = teamData
+		const { pokemons } = teamData;
+		const list = [];
 		for (const item of pokemons) {
-			item.isOpen = false;
+			list.push({...item, isOpen: false});
 		}
-		setData(pokemons);
+		setData(list);
 	};
 
 	const remove = () => {
 		const { pokemons } = teamData;
-		pokemons.splice(selectedIndex, 1);
+		const pokemonsCopy = pokemons;
+		pokemonsCopy.splice(selectedIndex, 1);
 		return {
-			pokemons,
+			pokemons: pokemonsCopy,
 		}
 	};
 
@@ -52,28 +101,24 @@ const Screen = ({ navigation }) => {
 			text='Sí, eliminar'
 			action={() => {
 				onRemovePokemon(),
-				setIsModalVisible(false)
+				setIsRemoveModalVisible(false)
 			}}
 			width='80%'
 		/>
 	))
 
-	const EmptyList = () => (
-		<View style={styles.emptyList}>
-			<Icon name='ellipsis-h' size={30} color={colors.MediumGray} />
-			<Text style={[styles.text, styles.emptyText]}>Lista vacía</Text>
-		</View>
-	);
-
 	const Footer = () => (
 		<View style={styles.box}>
 			<CustomButton
 				text='Guardar equipo'
-				// action={cancel}
+				action={() => {
+					route.params.isAdding ? addTeam() : updateTeam()
+				}}
 				icon={{name: 'save', color: colors.White}}
 				addSpacing={false}
 				width='80%'
 				isDisabled={data.length < 3 || !typedText}
+				isLoading={isLoading}
 			/>
 		</View>
 	);
@@ -121,7 +166,7 @@ const Screen = ({ navigation }) => {
 						<TouchableOpacity
 							onPress={() => {
 								setSelectedIndex(index),
-								setIsModalVisible(true)
+								setIsRemoveModalVisible(true)
 							}}
 						>
 							<Icon name='trash' size={25} color={colors.DarkGray} />
@@ -150,8 +195,8 @@ const Screen = ({ navigation }) => {
 	};
 
 	useEffect(() => {
-		if (!isModalVisible) setSelectedIndex(-1);
-	}, [isModalVisible])
+		if (!isRemoveModalVisible) setSelectedIndex(-1);
+	}, [isRemoveModalVisible])
 
 	useEffect(() => {
 		transformData();
@@ -159,10 +204,24 @@ const Screen = ({ navigation }) => {
 
 	return(
 		<View style={{flex: 1, marginHorizontal: 5}}>
-			<CustomModal isVisible={isModalVisible} setIsVisible={setIsModalVisible}>
+			<CustomModal isVisible={isRemoveModalVisible} setIsVisible={setIsRemoveModalVisible}>
 				<View style={{alignItems: 'center'}}>
 					<Text style={styles.text}>¿Deseas eliminar este pokemon?</Text>
 					<PokemonRemover onRemovePokemon={setPokemons} />
+				</View>
+			</CustomModal>
+			<CustomModal isVisible={isSuccessModalVisible} setIsVisible={setIsSuccessModalVisible}>
+				<View style={{alignItems: 'center'}}>
+					<Icon name='check-circle' size={30} color={colors.Salmon} />
+					<Text style={styles.text}>¡Equipo guardado exitosamente!</Text>
+					<CustomButton
+						text='De acuerdo'
+						action={() => {
+							setIsSuccessModalVisible(false),
+							navigation.goBack()
+						}}
+						width='80%'
+					/>
 				</View>
 			</CustomModal>
 			<View style={styles.box}>

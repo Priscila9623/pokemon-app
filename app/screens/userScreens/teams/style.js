@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { fonts } from '@config/style';
+import { colors, fonts } from '@config/style';
 
 const styles = StyleSheet.create({
 	team: {
@@ -17,18 +17,35 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-evenly',
 		width: '100%'
 	},
-	cardContainer: {
-		flexDirection: 'row',
-		justifyContent: 'space-around',
-		flexWrap: 'wrap',
+	myTeams: {
 		width: '100%',
 	},
-	myTeams: {
-
-	},
-	myTeamsText: {
+	myTeamsTitle: {
 		fontSize: 16,
 		fontFamily: fonts.MontserratBold,
+	},
+	myItemTeams: {
+		marginVertical: 10,
+		borderRadius: 12,
+		shadowColor: "#000",
+		shadowOffset: {
+			width: 0,
+			height: 2
+		},
+		shadowOpacity: 0.25,
+		shadowRadius: 3.84,
+		elevation: 5,
+		backgroundColor: colors.White,
+		flexDirection: 'row',
+		justifyContent: 'space-around',
+		height: 60,
+		alignItems: 'center'
+	},
+	myTeamsText: {
+		fontFamily: fonts.MontserratRegular,
+	},
+	text:{
+		fontFamily: fonts.MontserratRegular,
 	},
 });
 
