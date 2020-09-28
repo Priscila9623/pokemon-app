@@ -1,9 +1,8 @@
 import { GoogleSignin } from 'react-native-google-signin';
-import Config from "react-native-config";
 
 const configSignin = ()=>{
 	GoogleSignin.configure({
-		scopes: ['https://www.googleapis.com/auth/drive.readonly'], webClientId: Config.WEB_CLIENT_ID,
+		scopes: ['https://www.googleapis.com/auth/drive.readonly'], webClientId: '369007017734-g92dk21hl01gvk7c5e4v13epl4pal46e.apps.googleusercontent.com',
 		offlineAccess: true,
 		hostedDomain: '',
 		loginHint: '',
