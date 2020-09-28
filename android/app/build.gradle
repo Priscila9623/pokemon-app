@@ -199,6 +199,8 @@ dependencies {
 
 	implementation 'com.google.firebase:firebase-analytics:17.5.0'
 
+	implementation 'com.google.firebase:firebase-crashlytics:17.2.1'
+
 	implementation 'com.android.support:multidex:1.0.3'
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
@@ -234,3 +236,4 @@ apply from: file("../../node_modules/@react-native-community/cli-platform-androi
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
