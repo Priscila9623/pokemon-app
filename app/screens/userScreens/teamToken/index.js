@@ -17,7 +17,7 @@ const Screen = ({navigation }) => {
 		exists: false,
 		msg: '',
 	});
-	
+
 	const handleToken = async () => {
 		setIsLoading(true);
 		const response = await verifyToken(typedText);
@@ -26,7 +26,7 @@ const Screen = ({navigation }) => {
 		setIsLoading(false);
 	};
 
-	return(
+	return (
 		<Layout title='Equipo amigo' goBack={() => navigation.goBack()}>
 			<View style={styles.container}>
 				<CustomModal isVisible={isModalVisible} setIsVisible={setIsModalVisible}>
@@ -34,14 +34,14 @@ const Screen = ({navigation }) => {
 						<Icon
 							name={!msg.exists ? 'exclamation-circle' : 'check-circle'}
 							size={30}
-							color={!msg.exists ? colors.Red : colors.Green} 
+							color={!msg.exists ? colors.Red : colors.Green}
 						/>
 						<Text style={[styles.text, {textAlign: 'center'}]}>{msg.msg}</Text>
 						<CustomButton
 							text='De acuerdo'
 							action={() => {
 								setIsModalVisible(false),
-								msg.exists && navigation.goBack()
+								msg.exists && navigation.goBack();
 							}}
 							width='80%'
 						/>
@@ -56,7 +56,7 @@ const Screen = ({navigation }) => {
 					<CustomButton
 						text='Buscar equipo'
 						action={() => {
-							handleToken()
+							handleToken();
 						}}
 						addSpacing={false}
 						width='80%'

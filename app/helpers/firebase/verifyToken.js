@@ -11,12 +11,12 @@ const verifyToken = async (token) => {
 			...info,
 			token: newToken,
 			user_id: auth().currentUser.uid,
-			region_user: `${region_name}_${auth().currentUser.uid}`
+			region_user: `${region_name}_${auth().currentUser.uid}`,
 		});
 		return {
 			exists: true,
 			msg: 'Equipo creado exitosamente.',
-		}
+		};
 	};
 
 	return database().ref()
@@ -32,11 +32,11 @@ const verifyToken = async (token) => {
 				return {
 					exists: false,
 					msg: 'El equipo no fue encontrado, verifica si el token es correcto.',
-				}
+				};
 			}
 		})
 		.catch((err) => console.log('err', err));
-	
+
 };
 
 export default verifyToken;

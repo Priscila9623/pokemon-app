@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import { string } from "prop-types";
+import { string } from 'prop-types';
 import styles from './style';
 
 const Badge = ({text, color}) => (

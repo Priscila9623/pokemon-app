@@ -9,16 +9,16 @@ const transitionSpecConfig = {
 	},
 };
 
-const transitionConfig = (props, option='FOR_SLIDE_HORIZONTAL') => {
+const transitionConfig = (props, option = 'FOR_SLIDE_HORIZONTAL') => {
 	switch (option) {
-		case 'FOR_FADE':
-			return forFade(props);
-		case 'FOR_SLIDE_HORIZONTAL':
-			return forSlideHorizontal(props);
-		default:
-			return {};	
+	case 'FOR_FADE':
+		return forFade(props);
+	case 'FOR_SLIDE_HORIZONTAL':
+		return forSlideHorizontal(props);
+	default:
+		return {};
 	}
-}
+};
 
 export {
 	transitionSpecConfig,

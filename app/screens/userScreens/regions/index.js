@@ -24,9 +24,9 @@ const Screen = ({navigation }) => {
 	const [state, fetchData] = useDataApi({
 		url: urlRegion(),
 		headers: null,
-		hasCache: true
+		hasCache: true,
 	});
-	
+
 	const handleToken = async (token) => {
 		const response = await verifyToken(token);
 		setMsg(response);
@@ -49,7 +49,7 @@ const Screen = ({navigation }) => {
 	};
 
 	const handleOpenUrl = (evt)=>{
-		urlHandler(evt.url)
+		urlHandler(evt.url);
 	};
 
 	const setHasNewTeam = useCallback(
@@ -62,51 +62,51 @@ const Screen = ({navigation }) => {
 		if (!state.isLoading) {
 			if (state.isSuccess && state.data) {
 				setData(state.data.results);
-			} 
+			}
 		}
 	}, [state.isSuccess, state.isError]);
 
 	useEffect(() => {
 		fetchData();
 		Linking.getInitialURL().then(url => {
-			if (url) urlHandler(url);
+			if (url) {urlHandler(url);}
 		});
 		Linking.addEventListener('url', handleOpenUrl);
 		return ()=> Linking.removeEventListener('url', handleOpenUrl);
 
 	}, []);
-	
-	return(
+
+	return (
 		<Layout title='Regiones' showLogOut>
 			{
 				state.isLoading ? (
 					<ActivityIndicator style={styles.loader} size='large' color={colors.Salmon} />
 				) : (
 					<View style={styles.region}>
-					<CustomModal isVisible={isModalVisible} setIsVisible={setIsModalVisible}>
-						<View style={{alignItems: 'center'}}>
-							<Icon 
-								name={!msg.exists ? 'exclamation-circle' : 'check-circle'}
-								size={30}
-								color={!msg.exists ? colors.Red : colors.Green} 
-							/>
-							<Text style={[styles.text, {textAlign: 'center'}]}>{msg.msg}</Text>
-							<CustomButton
-								text='De acuerdo'
-								action={() => {
-									setIsModalVisible(false)
-								}}
-								width='80%'
-							/>
-						</View>
-					</CustomModal>
+						<CustomModal isVisible={isModalVisible} setIsVisible={setIsModalVisible}>
+							<View style={{alignItems: 'center'}}>
+								<Icon
+									name={!msg.exists ? 'exclamation-circle' : 'check-circle'}
+									size={30}
+									color={!msg.exists ? colors.Red : colors.Green}
+								/>
+								<Text style={[styles.text, {textAlign: 'center'}]}>{msg.msg}</Text>
+								<CustomButton
+									text='De acuerdo'
+									action={() => {
+										setIsModalVisible(false);
+									}}
+									width='80%'
+								/>
+							</View>
+						</CustomModal>
 						{data && (
 							<View style={styles.cardContainer}>
 								{data.map((el, index) =>
 									<Card
 										action={() =>
 											navigation.navigate('Team', {
-												name: el.name
+												name: el.name,
 											})
 										}
 										key={index}

@@ -47,13 +47,13 @@ const Screen = ({ route, navigation }) => {
 		});
 		setIsSuccessModalVisible(true);
 		setIsLoading(false);
-	}
+	};
 
 	const handleOpenItem = (index) => {
 		const modData = data;
 		modData[index].isOpen = !modData[index].isOpen;
-		setData([...modData])
-	}
+		setData([...modData]);
+	};
 
 	const transformData = () => {
 		const { pokemons } = teamData;
@@ -70,7 +70,7 @@ const Screen = ({ route, navigation }) => {
 		pokemonsCopy.splice(selectedIndex, 1);
 		return {
 			pokemons: pokemonsCopy,
-		}
+		};
 	};
 
 	const setPokemons = useCallback(
@@ -84,18 +84,18 @@ const Screen = ({ route, navigation }) => {
 			text='Sí, eliminar'
 			action={() => {
 				onRemovePokemon(),
-				setIsRemoveModalVisible(false)
+				setIsRemoveModalVisible(false);
 			}}
 			width='80%'
 		/>
-	))
+	));
 
 	const Footer = () => (
 		<View style={styles.box}>
 			<CustomButton
 				text='Guardar equipo'
 				action={() => {
-					route.params.isAdding ? addTeam() : updateTeam()
+					route.params.isAdding ? addTeam() : updateTeam();
 				}}
 				icon={{name: 'save', color: colors.White}}
 				addSpacing={false}
@@ -107,31 +107,31 @@ const Screen = ({ route, navigation }) => {
 	);
 
 	const Content = (item, index) => {
-		return(
+		return (
 			<View key={item.number} style={{backgroundColor: index % 2 && colors.LightGray}}>
 				<View style={styles.list}>
 					<View style={{flex: 1}}>
-					{
-						item.img ? (
-							<FastImage
-								style={styles.icon}
-								source={{
-									uri: item.img,
-									priority: FastImage.priority.normal,
-								}}
-								resizeMode={FastImage.resizeMode.contain}
-								fallback
-							/>
-						) : (
-							<View style={styles.defaultLogo}>
-								<Image
-									style={[styles.image]}
-									source={Pokeball}
-									resizeMode='contain'
+						{
+							item.img ? (
+								<FastImage
+									style={styles.icon}
+									source={{
+										uri: item.img,
+										priority: FastImage.priority.normal,
+									}}
+									resizeMode={FastImage.resizeMode.contain}
+									fallback
 								/>
-							</View>
-						)
-					}
+							) : (
+								<View style={styles.defaultLogo}>
+									<Image
+										style={[styles.image]}
+										source={Pokeball}
+										resizeMode='contain'
+									/>
+								</View>
+							)
+						}
 					</View>
 					<View style={{flex: 3}}>
 						<Text style={[styles.name]}>{item.name}</Text>
@@ -149,7 +149,7 @@ const Screen = ({ route, navigation }) => {
 						<TouchableOpacity
 							onPress={() => {
 								setSelectedIndex(index),
-								setIsRemoveModalVisible(true)
+								setIsRemoveModalVisible(true);
 							}}
 						>
 							<Icon name='trash' size={25} color={colors.DarkGray} />
@@ -174,18 +174,18 @@ const Screen = ({ route, navigation }) => {
 					)
 				}
 			</View>
-		)
+		);
 	};
 
 	useEffect(() => {
-		if (!isRemoveModalVisible) setSelectedIndex(-1);
-	}, [isRemoveModalVisible])
+		if (!isRemoveModalVisible) {setSelectedIndex(-1);}
+	}, [isRemoveModalVisible]);
 
 	useEffect(() => {
 		transformData();
 	}, [teamData]);
 
-	return(
+	return (
 		<View style={{flex: 1, marginHorizontal: 5}}>
 			<CustomModal isVisible={isRemoveModalVisible} setIsVisible={setIsRemoveModalVisible}>
 				<View style={{alignItems: 'center'}}>
@@ -201,7 +201,7 @@ const Screen = ({ route, navigation }) => {
 						text='De acuerdo'
 						action={() => {
 							setIsSuccessModalVisible(false),
-							navigation.goBack()
+							navigation.goBack();
 						}}
 						width='80%'
 					/>
@@ -222,10 +222,10 @@ const Screen = ({ route, navigation }) => {
 						style={styles.input}
 					/>
 					<TouchableOpacity
-						onPress={()=> data.length -6 ? navigation.navigate('Pokemon', {
+						onPress={()=> data.length - 6 ? navigation.navigate('Pokemon', {
 							isAdding: true,
 							selectedIndex: -1,
-						} ): { }}
+						} ) : { }}
 						style={[styles.teamHeaderButtons, styles.plus]}
 					>
 						<Icon name={data.length - 6 ? 'plus' : 'ban'} size={22} color={colors.DarkGray} />

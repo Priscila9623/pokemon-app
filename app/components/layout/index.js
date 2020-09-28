@@ -2,12 +2,12 @@ import React from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { string, node, oneOfType, func, bool } from "prop-types";
+import { string, node, oneOfType, func, bool } from 'prop-types';
 import { colors } from '@config/style';
 import styles from './style';
 
 const Layout = ({title, children, goBack, titleBackgroundColor, showLogOut}) => {
-	return(
+	return (
 		<View style={styles.container}>
 			<ScrollView contentContainerStyle={{ flexGrow: 1 }}>
 				<View style={[styles.titleContainer, {backgroundColor: titleBackgroundColor}]}>
@@ -29,7 +29,7 @@ const Layout = ({title, children, goBack, titleBackgroundColor, showLogOut}) => 
 							color={titleBackgroundColor ? colors.White : colors.Black}
 						/>
 					)}
-					<Text 
+					<Text
 						style={[
 							styles.text,
 							styles.title,
@@ -47,7 +47,7 @@ const Layout = ({title, children, goBack, titleBackgroundColor, showLogOut}) => 
 };
 
 Layout.defaultProps = {
-	showLogOut: false
+	showLogOut: false,
 };
 
 Layout.propTypes = {

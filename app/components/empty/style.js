@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
-		height: 150
+		height: 150,
 	},
 	emptyText: {
 		fontSize: 16,

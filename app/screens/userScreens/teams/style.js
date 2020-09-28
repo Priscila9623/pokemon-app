@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
 	buttons: {
 		height: 150,
 		justifyContent: 'space-evenly',
-		width: '100%'
+		width: '100%',
 	},
 	myTeams: {
 		width: '100%',
@@ -27,10 +27,10 @@ const styles = StyleSheet.create({
 	myItemTeams: {
 		marginVertical: 10,
 		borderRadius: 12,
-		shadowColor: "#000",
+		shadowColor: '#000',
 		shadowOffset: {
 			width: 0,
-			height: 2
+			height: 2,
 		},
 		shadowOpacity: 0.25,
 		shadowRadius: 3.84,
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'space-around',
 		height: 60,
-		alignItems: 'center'
+		alignItems: 'center',
 	},
 	myTeamsText: {
 		fontFamily: fonts.MontserratRegular,

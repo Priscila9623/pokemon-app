@@ -11,16 +11,16 @@ const Stack = createStackNavigator();
 const StackNavigator = () => {
 	const [initializing, setInitializing] = useState(true);
 	const [user, setUser] = useState();
-	  
+
 	const onAuthStateChanged = (user) => {
 		setUser(user);
-		if (initializing) setInitializing(false);
+		if (initializing) {setInitializing(false);}
 	};
 
 	useEffect(() => {
-		if (!initializing) SplashScreen.hide();
-	}, [initializing])
-	
+		if (!initializing) {SplashScreen.hide();}
+	}, [initializing]);
+
 	useEffect(() => {
 		const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
 		return subscriber;
@@ -33,7 +33,7 @@ const StackNavigator = () => {
 					initialRouteName={user ? 'Register' : 'Login'}
 					screenOptions={{
 						headerShown: false,
-						gestureDirection: "horizontal",
+						gestureDirection: 'horizontal',
 						transitionSpec:{
 							close: transitionSpecConfig,
 							open: transitionSpecConfig,
@@ -49,7 +49,7 @@ const StackNavigator = () => {
 				</Stack.Navigator>
 			)}
 		</>
-		
+
 	);
 };
 

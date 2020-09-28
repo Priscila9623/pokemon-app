@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
 	},
 	textDisabled: {
 		color: colors.MediumGray,
-	}
+	},
 });
 
 export default styles;

@@ -40,7 +40,7 @@ const useSearch = ({ whitelist = [], blacklist = [] } = {}) => {
 					const valueToCompareMod = valueTC.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
 						.includes(value[0]);
 
-					if (valueToCompare || valueToCompareMod) res = true;
+					if (valueToCompare || valueToCompareMod) {res = true;}
 				} else { // al menos 2 palabras de busqueda
 					let coincidencias = 0;
 					value.forEach((el, i) => {
@@ -48,10 +48,10 @@ const useSearch = ({ whitelist = [], blacklist = [] } = {}) => {
 						const valueToCompare = valueTC.includes(el);
 						const valueToCompareMod = valueTC.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
 							.includes(el);
-						if (valueToCompare || valueToCompareMod) coincidencias++;
+						if (valueToCompare || valueToCompareMod) {coincidencias++;}
 					});
 
-					if (coincidencias >= value.length) res = true;
+					if (coincidencias >= value.length) {res = true;}
 				}
 			}
 			return res;

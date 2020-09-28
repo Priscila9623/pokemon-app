@@ -26,4 +26,4 @@ const colors = {
 export {
 	fonts,
 	colors,
-}
+};

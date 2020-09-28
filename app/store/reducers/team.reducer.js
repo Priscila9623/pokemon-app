@@ -11,8 +11,8 @@ const initialState = {
 
 export default (state = initialState, action) => {
 	switch (action.type){
-		case SET_TEAM:
-			return {...state, ...action.payload};
-		default: return state;
+	case SET_TEAM:
+		return {...state, ...action.payload};
+	default: return state;
 	}
 };

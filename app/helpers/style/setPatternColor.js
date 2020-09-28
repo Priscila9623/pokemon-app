@@ -10,7 +10,6 @@ export const cardColors = {
 	Gray: colors.MediumGray,
 };
 
-const arr = [...Array(25).keys()];
 const isColor = (position, color) => {
 	const startAt = {
 		Salmon: 6,

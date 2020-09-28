@@ -19,7 +19,7 @@ const Screen = ({ route, navigation}) => {
 	const [state, fetchData] = useDataApi({
 		url: urlRegionByName(teamData.region_name),
 		headers: null,
-		hasCache: true
+		hasCache: true,
 	});
 	const [statePokedex, fetchDataPokedex] = useDataApi();
 	const [filteredData, setSearch, setSourceData] = useSearch();
@@ -38,12 +38,12 @@ const Screen = ({ route, navigation}) => {
 			}
 		}
 		setpokedexItem(pokedexItem + 1);
-	}
+	};
 
 	const handlePokedexes = (pokedexes) => {
 		setPokedexSize(pokedexes.length);
 		for (const item of pokedexes) {
-			fetchDataPokedex({url: item.url})
+			fetchDataPokedex({url: item.url});
 		}
 	};
 
@@ -64,7 +64,7 @@ const Screen = ({ route, navigation}) => {
 	}, [state.isSuccess, state.isError]);
 
 	useEffect(() => {
-		if (pokedexItem === pokedexSize) setSourceData(data);
+		if (pokedexItem === pokedexSize) {setSourceData(data);}
 	}, [pokedexItem]);
 
 	useEffect(() => {
@@ -73,7 +73,7 @@ const Screen = ({ route, navigation}) => {
 		fetchData();
 	}, []);
 
-	return(
+	return (
 		<Layout title='Pokemons' goBack={() => navigation.goBack()}>
 			{pokedexItem < pokedexSize ? (
 				<ActivityIndicator style={styles.loader} size='large' color={colors.Salmon} />
@@ -84,7 +84,7 @@ const Screen = ({ route, navigation}) => {
 							<View style={styles.searcher}>
 								<Icon name={'search'} size={22} color={colors.DarkGray} />
 								<TextInput
-									onChangeText={(value) => {setTypedText(value), setSearch(value)}}
+									onChangeText={(value) => {setTypedText(value), setSearch(value);}}
 									value={typedText}
 									placeholder='Buscar un pokemon'
 									style={styles.input}
@@ -92,7 +92,7 @@ const Screen = ({ route, navigation}) => {
 							</View>
 							<View style={styles.cardContainer}>
 								{filteredData.map((el, index) =>
-									<Card 
+									<Card
 										action={() =>
 											navigation.navigate('PokemonDetails', {
 												url: el.pokemon_species.url,
@@ -103,7 +103,7 @@ const Screen = ({ route, navigation}) => {
 										}
 										key={index}
 										text={el.pokemon_species.name}
-										index={index}	
+										index={index}
 									/>
 								)}
 							</View>

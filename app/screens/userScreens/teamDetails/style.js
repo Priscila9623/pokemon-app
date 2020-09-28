@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
-		height: 150
+		height: 150,
 	},
 	emptyText: {
 		fontSize: 16,
@@ -93,13 +93,13 @@ const styles = StyleSheet.create({
 		flex: 1,
 		flexDirection: 'row',
 		alignItems: 'center',
-		justifyContent: 'space-evenly'
+		justifyContent: 'space-evenly',
 	},
 	actions: {
 		flex: 2,
 		flexDirection: 'row',
 		justifyContent: 'space-evenly',
-		alignItems: 'center'
+		alignItems: 'center',
 	},
 	description: {
 		flex: 1,
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
 	descriptionText: {
 		fontFamily: fonts.MontserratRegular,
 		fontSize: 13,
-	}
+	},
 });
 
 export default styles;

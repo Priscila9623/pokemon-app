@@ -28,14 +28,14 @@ const Screen = ({ route, navigation }) => {
 				`Obtén mi equipo de pokemons para la region ${item.region_name} 
 				http://pokepris26.com/${item.region_name}/${item.token}`,
 			});
-			} catch (error) {
-			
+		} catch (error) {
+
 		}
 	};
 
 	const transformData = (teams) => {
 		const list = [];
-		if(teams) {
+		if (teams) {
 			for (const key in teams) {
 				teams[key].key = key;
 				list.push(teams[key]);
@@ -59,7 +59,7 @@ const Screen = ({ route, navigation }) => {
 			.once('value');
 		transformData(snap.val());
 		setIsLoading(false);
-	}
+	};
 
 	const setTeamDetails = useCallback(
 		(team) => dispatch(
@@ -83,11 +83,11 @@ const Screen = ({ route, navigation }) => {
 					token: '',
 					region_name: route.params.name,
 					user_id: auth().currentUser.uid,
-					region_user: `${route.params.name}_${auth().currentUser.uid}`
+					region_user: `${route.params.name}_${auth().currentUser.uid}`,
 				}),
 				navigation.navigate('TeamDetails', {
 					isAdding: true,
-				})
+				});
 			}}
 			icon={{name: 'plus', color: colors.White}}
 			color={colors.Salmon}
@@ -102,15 +102,15 @@ const Screen = ({ route, navigation }) => {
 				navigation.navigate('TeamDetails', {
 					isAdding: false,
 				}
-			)}}
+				);}}
 		>
 			<Icon name='edit' size={25} color={colors.DarkGray} />
 		</TouchableOpacity>
-	))
+	));
 
 	useEffect(() => {
-		if (!isRemoveModalVisible) setSelectedKey(-1);
-	}, [isRemoveModalVisible])
+		if (!isRemoveModalVisible) {setSelectedKey(-1);}
+	}, [isRemoveModalVisible]);
 
 	useEffect(() => {
 		if (!newTeam) {
@@ -126,9 +126,9 @@ const Screen = ({ route, navigation }) => {
 			getTeams();
 			setHasNewTeam();
 		}
-	}, [newTeam])
-	
-	return(
+	}, [newTeam]);
+
+	return (
 		<Layout title={`Equipos / ${route.params.name}`} goBack={() =>navigation.goBack()} showLogOut>
 			<View style={styles.team}>
 				<CustomModal isVisible={isRemoveModalVisible} setIsVisible={setIsRemoveModalVisible}>
@@ -137,7 +137,7 @@ const Screen = ({ route, navigation }) => {
 						<CustomButton
 							text='Sí, eliminar'
 							action={() => {
-								deleteTeam()
+								deleteTeam();
 							}}
 							width='80%'
 						/>
@@ -148,7 +148,7 @@ const Screen = ({ route, navigation }) => {
 					<CustomButton
 						text='Obtener equipo amigo'
 						action={()=>{
-							navigation.navigate('TeamToken')
+							navigation.navigate('TeamToken');
 						}}
 						icon={{name: 'user', color: colors.White}}
 						color={colors.Blue}
@@ -172,7 +172,7 @@ const Screen = ({ route, navigation }) => {
 											</View>
 											<TouchableOpacity
 												onPress={() => {
-													onShare(el)
+													onShare(el);
 												}}
 											>
 												<Icon name='share' size={25} color={colors.DarkGray} />
@@ -181,13 +181,13 @@ const Screen = ({ route, navigation }) => {
 											<TouchableOpacity
 												onPress={() => {
 													setSelectedKey(el.key),
-													setIsRemoveModalVisible(true)
+													setIsRemoveModalVisible(true);
 												}}
 											>
 												<Icon name='trash' size={25} color={colors.DarkGray} />
 											</TouchableOpacity>
 										</View>
-										
+
 									)}
 								</View>
 							) : (<EmptyList />)}

@@ -23,12 +23,12 @@ const Screen = ({ route, navigation }) => {
 	const [stateSpecies, fetchDataSpecies] = useDataApi({
 		url: route.params.url,
 		headers: null,
-		hasCache: true
+		hasCache: true,
 	});
 	const [statePokemon, fetchDataPokemon] = useDataApi({
 		url: urlPokemonByName(route.params.name),
 		headers: null,
-		hasCache: true
+		hasCache: true,
 	});
 
 	const traduce = (traductions) => {
@@ -37,13 +37,13 @@ const Screen = ({ route, navigation }) => {
 	};
 
 	const handleColor = (color) => {
-		if(['yellow', 'Yellow'].includes(color)) {
+		if (['yellow', 'Yellow'].includes(color)) {
 			return colors.Yellow;
 		} else if (['white', 'White'].includes(color)){
 			return colors.DarkGray;
 		}
 		return color;
-	}
+	};
 
 	const getCurrentPokemon = () => {
 		const currentPokemon = {
@@ -55,7 +55,7 @@ const Screen = ({ route, navigation }) => {
 			color: handleColor(data.color.name),
 		};
 		return currentPokemon;
-	}
+	};
 
 	const add = () => {
 		const { pokemons } = teamData;
@@ -74,8 +74,8 @@ const Screen = ({ route, navigation }) => {
 		pokemonsCopy.splice(route.params.selectedIndex, 1, currentPokemon);
 		return {
 			pokemon: pokemonsCopy,
-		}
-	}
+		};
+	};
 
 	const handleAction = () => {
 		route.params.isAdding ? add() : edit();
@@ -86,7 +86,7 @@ const Screen = ({ route, navigation }) => {
 			setTeam(handleAction())),
 		[dispatch, data, typedText]
 	);
-	
+
 
 	const PokemonAdder = React.memo(({ onSetPokemon }) => (
 		<CustomButton
@@ -94,32 +94,32 @@ const Screen = ({ route, navigation }) => {
 			action={() => {
 				onSetPokemon(),
 				setIsModalVisible(false),
-				navigation.navigate('TeamDetails')
+				navigation.navigate('TeamDetails');
 			}}
 			width='80%'
 			isDisabled={typedText.length === 0}
 		/>
-	))
+	));
 
 	useEffect(() => {
 		if (!statePokemon.isLoading) {
 			if (statePokemon.isSuccess && stateSpecies.isSuccess) {
-				setData({...stateSpecies.data, ...statePokemon.data})
+				setData({...stateSpecies.data, ...statePokemon.data});
 			}
 		}
 	}, [
 		statePokemon.isSuccess,
 		statePokemon.isError,
 		stateSpecies.isSuccess,
-		stateSpecies.isError
+		stateSpecies.isError,
 	]);
 
 	useEffect(() => {
 		fetchDataSpecies();
 		fetchDataPokemon();
 	}, []);
-	
-	return(
+
+	return (
 		<>
 			{
 				!data ? (
@@ -182,7 +182,7 @@ const Screen = ({ route, navigation }) => {
 											<Text style={[styles.text]}>{data.order}</Text>
 										</View>
 									</View>
-									
+
 									<View style={styles.basicDetails}>
 										<Text style={[styles.label]}>Tipos:</Text>
 									</View>
@@ -193,7 +193,7 @@ const Screen = ({ route, navigation }) => {
 									</View>
 								</View>
 							</View>
-							</View>
+						</View>
 					</Layout>
 				)
 			}

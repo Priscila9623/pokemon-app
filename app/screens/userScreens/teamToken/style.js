@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
 	},
 	text: {
 		fontFamily: fonts.MontserratRegular,
-	}
+	},
 });
 
 export default styles;

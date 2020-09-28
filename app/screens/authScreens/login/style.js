@@ -28,8 +28,8 @@ const styles = StyleSheet.create({
 	},
 	footerImage: {
 		width: 150,
-		height: 120
-	}
+		height: 120,
+	},
 });
 
 export default styles;

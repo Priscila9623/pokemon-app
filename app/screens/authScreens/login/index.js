@@ -53,7 +53,7 @@ const Screen = () => {
 				<Image style={styles.footerImage} source={LoginFooter} resizeMode='contain' />
 			</View>
 		</View>
-	)
+	);
 };
 
 export default Screen;

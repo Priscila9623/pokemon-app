@@ -4,8 +4,8 @@ const initialState = false;
 
 export default (state = initialState, action) => {
 	switch (action.type){
-		case HAS_NEW_TEAM:
-			return action.payload;
-		default: return state;
+	case HAS_NEW_TEAM:
+		return action.payload;
+	default: return state;
 	}
 };

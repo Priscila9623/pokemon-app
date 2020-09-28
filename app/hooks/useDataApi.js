@@ -60,12 +60,12 @@ const reducer = (state, action) => {
 /**
  * useDataApi
  * @param {initialSettings} [initialSettings] - Configuracion inicial
- * @returns {[state, fetchData]} Estado del hook y funcion fetchData 
+ * @returns {[state, fetchData]} Estado del hook y funcion fetchData
  */
 const useDataApi = ({
 	url: originalUrl,
 	headers = null,
-	hasCache = false
+	hasCache = false,
 } = {}) => {
 	const { state: stateCache, setResult } = useContext(CacheContext);
 
@@ -112,9 +112,9 @@ const useDataApi = ({
 		method = 'get',
 		params = undefined,
 		url = null,
-		refreshCache = false
+		refreshCache = false,
 	} = {}) => {
-		if (state.isLoading) return;	//hay una solicitud en proceso
+		if (state.isLoading) {return;}	//hay una solicitud en proceso
 
 		const request = {
 			method,

@@ -3,7 +3,7 @@ import 'react-native-get-random-values';
 import { customAlphabet } from 'nanoid';
 
 const generateToken = async () => {
-	const nanoid = customAlphabet('1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', 6)
+	const nanoid = customAlphabet('1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', 6);
 	const code = nanoid();
 	const exists = await database().ref()
 		.child('teams')

@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
 		padding: 20,
 		width: '100%',
 		alignItems: 'center',
-		justifyContent: 'center'
+		justifyContent: 'center',
 	},
 	image: {
 		width: '60%',
@@ -35,7 +35,6 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignItems: 'flex-start',
 		flexGrow: 1,
-        flex: 1,
 	},
 	text:{
 		fontFamily: fonts.MontserratRegular,
@@ -55,14 +54,13 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		alignItems: 'center',
 		justifyContent: 'space-evenly',
-		// width: '100%',
 		borderRadius: 12,
 		marginTop: 7,
 		padding: 10,
-		shadowColor: "#000",
+		shadowColor: '#000',
 		shadowOffset: {
 			width: 0,
-			height: 2
+			height: 2,
 		},
 		shadowOpacity: 0.25,
 		shadowRadius: 3.84,
