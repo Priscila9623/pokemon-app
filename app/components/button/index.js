@@ -40,7 +40,7 @@ const Button = ({ text, isDisabled, action, color, icon, typeOfShape, addSpacing
 			{isLoading ? <ActivityIndicator size='small' color='rgb(210, 230, 255)' /> : 
 			icon && <Icon name={icon.name} size={22} color={isDisabled ? colors.MediumGray : icon.color} />}
 			{text && (
-				<Text style={[styles.text, isDisabled ? styles.textDisabled : styles.textActive]}>
+				<Text style={[icon && {marginLeft: 10}, styles.text, isDisabled ? styles.textDisabled : styles.textActive]}>
 					{text}
 				</Text>
 			)}

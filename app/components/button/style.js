@@ -27,7 +27,6 @@ const styles = StyleSheet.create({
 		fontFamily: fonts.MontserratMedium,
 		fontSize: 14,
 		textAlign: 'center',
-		marginLeft: 10,
 	},
 	btnDisabled: {
 		backgroundColor: colors.LightGray,

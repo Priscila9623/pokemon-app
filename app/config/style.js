@@ -20,6 +20,7 @@ const colors = {
 	Mint: '#4DE092',
 	Purple: '#815AF9',
 	Brown: '#986D6D',
+	Green: '#46C92C',
 };
 
 export {
