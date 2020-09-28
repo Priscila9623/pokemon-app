@@ -3,14 +3,13 @@ import { View, TextInput, TouchableOpacity, FlatList, Text, Image } from 'react-
 import { useSelector, useDispatch } from 'react-redux';
 import database from '@react-native-firebase/database';
 import FastImage from 'react-native-fast-image';
-import 'react-native-get-random-values';
-import { nanoid } from 'nanoid';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import CustomButton from '@components/button';
 import CustomModal from '@components/modal';
 import Badge from '@components/badge';
 import EmptyList from '@components/empty';
 import { setTeam } from '@actions/team.action';
+import generateToken from '@helpers/firebase/generateToken';
 import Pokeball from '@images/pokeball.png';
 import { colors } from '@config/style';
 import styles from './style';
@@ -24,22 +23,6 @@ const Screen = ({ route, navigation }) => {
 	const [typedText, setTypedText] = useState(teamData.name);
 	const [selectedIndex, setSelectedIndex] = useState(-1);
 	const [isLoading, setIsLoading] = useState(false);
-
-	const generateToken = async () => {
-		const code = nanoid();
-		const isUsed = await database().ref()
-			.child('teams')
-			.orderByChild('token')
-			.equalTo(String(code))
-			.once('value')
-			.then((s) => s.val())
-			.catch((err) => console.log('err', err));
-
-		if (isUsed) {
-			return generateToken();
-		}
-		return code;
-	};
 
 	const updateTeam = () => {
 		setIsLoading(true);
@@ -206,14 +189,14 @@ const Screen = ({ route, navigation }) => {
 		<View style={{flex: 1, marginHorizontal: 5}}>
 			<CustomModal isVisible={isRemoveModalVisible} setIsVisible={setIsRemoveModalVisible}>
 				<View style={{alignItems: 'center'}}>
-					<Text style={styles.text}>¿Deseas eliminar este pokemon?</Text>
+					<Text style={[styles.text, {textAlign: 'center'}]}>¿Deseas eliminar este pokemon?</Text>
 					<PokemonRemover onRemovePokemon={setPokemons} />
 				</View>
 			</CustomModal>
 			<CustomModal isVisible={isSuccessModalVisible} setIsVisible={setIsSuccessModalVisible}>
 				<View style={{alignItems: 'center'}}>
-					<Icon name='check-circle' size={30} color={colors.Salmon} />
-					<Text style={styles.text}>¡Equipo guardado exitosamente!</Text>
+					<Icon name='check-circle' size={30} color={colors.Green} />
+					<Text style={[styles.text, {textAlign: 'center'}]}>¡Equipo guardado exitosamente!</Text>
 					<CustomButton
 						text='De acuerdo'
 						action={() => {
