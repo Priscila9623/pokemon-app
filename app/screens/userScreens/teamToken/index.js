@@ -21,7 +21,6 @@ const Screen = ({navigation }) => {
 	const handleToken = async () => {
 		setIsLoading(true);
 		const response = await verifyToken(typedText);
-        console.log("handleToken -> response", response);
 		setMsg(response);
 		setIsModalVisible(true);
 		setIsLoading(false);
