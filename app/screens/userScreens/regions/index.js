@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Text, View, ActivityIndicator, Linking } from 'react-native';
+import { useDispatch } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Layout from '@components/layout';
 import Card from '@components/card';
@@ -7,11 +8,13 @@ import CustomModal from '@components/modal';
 import CustomButton from '@components/button';
 import useDataApi from '@hooks/useDataApi';
 import verifyToken from '@helpers/firebase/verifyToken';
+import { hasNewTeam } from '@actions/newTeam.action';
 import { urlRegion } from '@config/paths';
 import { colors } from '@config/style';
 import styles from './style';
 
 const Screen = ({navigation }) => {
+	const dispatch = useDispatch();
 	const [data, setData] = useState([]);
 	const [isModalVisible, setIsModalVisible] = useState(false);
 	const [msg, setMsg] = useState({
@@ -26,7 +29,6 @@ const Screen = ({navigation }) => {
 	
 	const handleToken = async (token) => {
 		const response = await verifyToken(token);
-        console.log("handleToken -> response", response);
 		setMsg(response);
 		setIsModalVisible(true);
 	};
@@ -40,14 +42,21 @@ const Screen = ({navigation }) => {
 		const route = url.replace(/.*?:\/\//g, '');
 		await getTeam(route);
 		const region = route.split('/')[1];
+		setHasNewTeam();
 		navigation.navigate('Team', {
-			name: region
+			name: region,
 		});
 	};
 
 	const handleOpenUrl = (evt)=>{
 		urlHandler(evt.url)
 	};
+
+	const setHasNewTeam = useCallback(
+		() => dispatch(
+			hasNewTeam(true)),
+		[dispatch]
+	);
 
 	useEffect(() => {
 		if (!state.isLoading) {

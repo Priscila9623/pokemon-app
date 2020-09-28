@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, TouchableOpacity, ActivityIndicator, Share } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -10,9 +10,11 @@ import CustomModal from '@components/modal';
 import EmptyList from '@components/empty';
 import { colors } from '@config/style';
 import { setTeam } from '@actions/team.action';
+import { hasNewTeam } from '@actions/newTeam.action';
 import styles from './style';
 
 const Screen = ({ route, navigation }) => {
+	const newTeam = useSelector((state) => state.newTeam);
 	const dispatch = useDispatch();
 	const [data, setData] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
@@ -65,6 +67,12 @@ const Screen = ({ route, navigation }) => {
 		[dispatch]
 	);
 
+	const setHasNewTeam = useCallback(
+		() => dispatch(
+			hasNewTeam(false)),
+		[dispatch]
+	);
+
 	const TeamAdder = React.memo(({ onSetDetails }) => (
 		<CustomButton
 			text='Crear nuevo equipo'
@@ -105,77 +113,88 @@ const Screen = ({ route, navigation }) => {
 	}, [isRemoveModalVisible])
 
 	useEffect(() => {
-		const unsubscribe = navigation.addListener('focus', () => {
-			getTeams();
-		});
-		return unsubscribe;
+		if (!newTeam) {
+			const unsubscribe = navigation.addListener('focus', () => {
+				getTeams();
+			});
+			return unsubscribe;
+		}
 	}, [navigation]);
+
+	useEffect(() => {
+		if (newTeam) {
+			getTeams();
+			setHasNewTeam();
+		}
+	}, [newTeam])
 	
 	return(
 		<Layout title={`Equipos / ${route.params.name}`} goBack={() =>navigation.goBack()} showLogOut>
-			{
-				isLoading ? (
-					<ActivityIndicator style={styles.loader} size='large' color={colors.Salmon} />
-				) : (
-					<View style={styles.team}>
-						<CustomModal isVisible={isRemoveModalVisible} setIsVisible={setIsRemoveModalVisible}>
-							<View style={{alignItems: 'center'}}>
-								<Text style={[styles.text, {textAlign: 'center'}]}>¿Deseas eliminar este equipo?</Text>
-								<CustomButton
-									text='Sí, eliminar'
-									action={() => {
-										deleteTeam()
-									}}
-									width='80%'
-								/>
-							</View>
-						</CustomModal>
-						<View style={styles.buttons}>
-							<TeamAdder onSetDetails={setTeamDetails} />
-							<CustomButton
-								text='Obtener equipo amigo'
-								action={()=>{
-									navigation.navigate('TeamToken')
-								}}
-								icon={{name: 'user', color: colors.White}}
-								color={colors.Blue}
-								addSpacing={false}
-							/>
-						</View>
-						<View>
-							<Text style={styles.myTeamsTitle}>Mis equipos</Text>
-						</View>
-						{data.length ? (
-							<View style={styles.myTeams}>
-								{data.map((el, index) =>
-									<View key={index} style={styles.myItemTeams}>
-										<View style={{width: '60%'}}>
-											<Text style={styles.myTeamsText}>{el.name}</Text>
-										</View>
-										<TouchableOpacity
-											onPress={() => {
-												onShare(el)
-											}}
-										>
-											<Icon name='share' size={25} color={colors.DarkGray} />
-										</TouchableOpacity>
-										<TeamEditor onSetDetails={setTeamDetails} item={el} />
-										<TouchableOpacity
-											onPress={() => {
-												setSelectedKey(el.key),
-												setIsRemoveModalVisible(true)
-											}}
-										>
-											<Icon name='trash' size={25} color={colors.DarkGray} />
-										</TouchableOpacity>
-									</View>
-									
-								)}
-							</View>
-						) : (<EmptyList />)}
+			<View style={styles.team}>
+				<CustomModal isVisible={isRemoveModalVisible} setIsVisible={setIsRemoveModalVisible}>
+					<View style={{alignItems: 'center'}}>
+						<Text style={[styles.text, {textAlign: 'center'}]}>¿Deseas eliminar este equipo?</Text>
+						<CustomButton
+							text='Sí, eliminar'
+							action={() => {
+								deleteTeam()
+							}}
+							width='80%'
+						/>
 					</View>
-				)
-			}
+				</CustomModal>
+				<View style={styles.buttons}>
+					<TeamAdder onSetDetails={setTeamDetails} />
+					<CustomButton
+						text='Obtener equipo amigo'
+						action={()=>{
+							navigation.navigate('TeamToken')
+						}}
+						icon={{name: 'user', color: colors.White}}
+						color={colors.Blue}
+						addSpacing={false}
+					/>
+				</View>
+				<View>
+					<Text style={styles.myTeamsTitle}>Mis equipos</Text>
+				</View>
+				{
+					isLoading ? (
+						<ActivityIndicator style={styles.loader} size='large' color={colors.Salmon} />
+					) : (
+						<>
+							{data.length ? (
+								<View style={styles.myTeams}>
+									{data.map((el, index) =>
+										<View key={index} style={styles.myItemTeams}>
+											<View style={{width: '60%'}}>
+												<Text style={styles.myTeamsText}>{el.name}</Text>
+											</View>
+											<TouchableOpacity
+												onPress={() => {
+													onShare(el)
+												}}
+											>
+												<Icon name='share' size={25} color={colors.DarkGray} />
+											</TouchableOpacity>
+											<TeamEditor onSetDetails={setTeamDetails} item={el} />
+											<TouchableOpacity
+												onPress={() => {
+													setSelectedKey(el.key),
+													setIsRemoveModalVisible(true)
+												}}
+											>
+												<Icon name='trash' size={25} color={colors.DarkGray} />
+											</TouchableOpacity>
+										</View>
+										
+									)}
+								</View>
+							) : (<EmptyList />)}
+						</>
+					)}
+			</View>
+
 		</Layout>
 	);
 };
