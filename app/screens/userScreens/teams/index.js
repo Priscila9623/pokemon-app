@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { View, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { View, Text, TouchableOpacity, ActivityIndicator, Share } from 'react-native';
 import { useDispatch } from 'react-redux';
 import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
@@ -17,7 +17,19 @@ const Screen = ({ route, navigation }) => {
 	const [data, setData] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 	const [selectedKey, setSelectedKey] = useState(-1);
-;	const [isRemoveModalVisible, setIsRemoveModalVisible] = useState(false);
+	const [isRemoveModalVisible, setIsRemoveModalVisible] = useState(false);
+
+	const onShare = async (item) => {
+		try {
+			await Share.share({
+				message:
+				`Obtén mi equipo de pokemons para la region ${item.region_name} 
+				http://pokepris26.com/${item.region_name}/${item.token}`,
+			});
+			} catch (error) {
+			
+		}
+	};
 
 	const transformData = (teams) => {
 		const list = [];
@@ -100,7 +112,7 @@ const Screen = ({ route, navigation }) => {
 	}, [navigation]);
 	
 	return(
-		<Layout title={`Equipos / ${route.params.name}`} goBack={() =>navigation.goBack()}>
+		<Layout title={`Equipos / ${route.params.name}`} goBack={() =>navigation.goBack()} showLogOut>
 			{
 				isLoading ? (
 					<ActivityIndicator style={styles.loader} size='large' color={colors.Salmon} />
@@ -108,7 +120,7 @@ const Screen = ({ route, navigation }) => {
 					<View style={styles.team}>
 						<CustomModal isVisible={isRemoveModalVisible} setIsVisible={setIsRemoveModalVisible}>
 							<View style={{alignItems: 'center'}}>
-								<Text style={styles.text}>¿Deseas eliminar este equipo?</Text>
+								<Text style={[styles.text, {textAlign: 'center'}]}>¿Deseas eliminar este equipo?</Text>
 								<CustomButton
 									text='Sí, eliminar'
 									action={() => {
@@ -122,7 +134,9 @@ const Screen = ({ route, navigation }) => {
 							<TeamAdder onSetDetails={setTeamDetails} />
 							<CustomButton
 								text='Obtener equipo amigo'
-								// action={cancel}
+								action={()=>{
+									navigation.navigate('TeamToken')
+								}}
 								icon={{name: 'user', color: colors.White}}
 								color={colors.Blue}
 								addSpacing={false}
@@ -135,9 +149,16 @@ const Screen = ({ route, navigation }) => {
 							<View style={styles.myTeams}>
 								{data.map((el, index) =>
 									<View key={index} style={styles.myItemTeams}>
-										<View style={{width: '65%'}}>
+										<View style={{width: '60%'}}>
 											<Text style={styles.myTeamsText}>{el.name}</Text>
 										</View>
+										<TouchableOpacity
+											onPress={() => {
+												onShare(el)
+											}}
+										>
+											<Icon name='share' size={25} color={colors.DarkGray} />
+										</TouchableOpacity>
 										<TeamEditor onSetDetails={setTeamDetails} item={el} />
 										<TouchableOpacity
 											onPress={() => {
